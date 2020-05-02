@@ -48,7 +48,7 @@ for eps in range(EPISODES):
             q_target = LEARNING_RATE*(reward + (DISCOUNT*np.max(q_table[new_dis_state])) - q_table[state][action])
             q_table[state][action] += q_target
         elif new_state[0] >= env.goal_position:
-            print(f"Yay we reached our goal {eps}th episode")
+            print(f"Yay we reached our goal at {eps}th episode")
             q_table[state][action] = 0 # our terminal state
 
         if render == True:
@@ -57,7 +57,7 @@ for eps in range(EPISODES):
         state = new_dis_state
 
     EPSILON /= DECAY_RATE
-    # now we save our q_table
-    if eps%500 == 0:
-        np.save(f"qtables/{eps}-qtable.npy", q_table)
+
+# now we save our q_table
+np.save(f"qtable_final.npy", q_table)
 env.close()
