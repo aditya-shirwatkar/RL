@@ -57,5 +57,7 @@ for eps in range(EPISODES):
         state = new_dis_state
 
     EPSILON /= DECAY_RATE
-
+    # now we save our q_table
+    if eps%500 == 0:
+        np.save(f"qtables/{eps}-qtable.npy", q_table)
 env.close()
