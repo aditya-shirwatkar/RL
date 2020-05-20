@@ -1,7 +1,12 @@
 # RL
  Implementations of Reinforcement Learning algorithms
 
-[TOC]
+- [RL](#rl)
+  * [Cartpole-v0](#cartpole-v0)
+    + [DQN](#dqn)
+  * [MountainCar-v0](#mountaincar-v0)
+    + [Q-learning](#q-learning)
+
 
 ## Cartpole-v0
 ### DQN
