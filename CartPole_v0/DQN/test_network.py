@@ -3,18 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 import gym
 from matplotlib import pyplot as plt
-from matplotlib import animation as anime
 
 plt.style.use('fivethirtyeight')
 xval = []
 yval = []
-
-plt.ylabel('Reward')
-plt.xlabel('episode')
-
-def animate(i):
-    plt.cla()
-    plt.plot(xval, yval)
 
 class DqnAgent(nn.Module):
     def __init__(self):
@@ -32,7 +24,7 @@ class DqnAgent(nn.Module):
 run = torch.load('4_572_256_2')
 run.eval()
 env = gym.make('CartPole-v0')
-EPISODES = 1000
+EPISODES = 5
 
 for eps in range(EPISODES):
     batch_reward = 0
@@ -49,13 +41,9 @@ for eps in range(EPISODES):
 
     xval.append(eps)
     yval.append(batch_reward)
-    ani = anime.FuncAnimation(plt.gcf(), animate, interval=1000)
-    plt.tight_layout()
-    plt.draw()
-    plt.pause(0.001)
 
 env.close()
-plt.close()
 plt.ylabel('Reward')
 plt.xlabel('episode')
 plt.plot(xval, yval)
+plt.show()
