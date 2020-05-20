@@ -1,6 +1,17 @@
-from dqn import *
+import torch
+import gym
+from matplotlib import pyplot as plt
+from matplotlib import animation as anime
 
-run = torch.load('final_new2')
+plt.style.use('fivethirtyeight')
+xval = []
+yval = []
+
+def animate(i):
+    plt.cla()
+    plt.plot(xval, yval)
+
+run = torch.load('4_572_256_2')
 run.eval()
 env = gym.make('CartPole-v0')
 EPISODES = 1000
@@ -20,5 +31,14 @@ for eps in range(EPISODES):
         state = new_state
         env.render()
         k += 1
+
+    xval.append(eps)
+    yval.append(batch_reward)
+    ani = anime.FuncAnimation(plt.gcf(), animate, interval=1000)
+    if eps%cart.SHOW_EVERY == 0:
+        plt.tight_layout()
+        plt.draw()
+        plt.pause(0.001)
+        # cart.train(batch_reward)
 
 env.close()
